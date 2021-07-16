@@ -22,7 +22,7 @@ if str2double(bnd(2))==1
     qzzz = ( qzzpz*dmz - qzz*dmz + qzz*dpz - qzzmz*dpz )/(2*dpz*dmz);
 
 elseif str2double(bnd(2))==0
-    qz   = 0;
+    qz   = qzpz    - qzzpz*dpz;
     qzz  = qzzpz   - qzzzpz*dpz;
     qzzz = ( qzzpz - qzz )/dpz;
 

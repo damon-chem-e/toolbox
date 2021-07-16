@@ -27,3 +27,5 @@ latex  = {'$q$','$\psi$','$mue$','$sigqk$','$sigqs$'};
 
 latexv = {'$v^i$','$v_\eta^i$','$v_z^i$','$v^h$','$v_\eta^h$','$v_z^h$'};
 
+latexs = {'$\eta$', '$\sigma$'};
+
