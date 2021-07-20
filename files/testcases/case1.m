@@ -25,32 +25,28 @@ m = [24,17];
 s = [.01,0.01;.01,.01];
 x1 = linspace(d,n1*d,n1);
 x2 = linspace(d,n2*d,n2);
-[X1,X2] = meshgrid(x1,x2); 
+[X1,X2] = meshgrid(x1,x2); % currently hard-coded for 20 points
 X = [X1(:),X2(:)];
 Jnow = mvnpdf(X,m,s);
 Jnow_plot = reshape(Jnow,length(x1),length(x2));
 Jnow = Jnow';
 
 % plot initial distribution
-surf(x2,x1,Jnow_plot)
+surf(x1,x2,Jnow_plot)
 caxis([min(Jnow_plot(:))-0.5*range(Jnow_plot(:)),max(Jnow_plot(:))])
-axis([0 n2*d 0 n1*d 0 12.0e8])
+axis([0 25 0 25 0 12.0e8])
 xlabel('x1')
 ylabel('x2')
 zlabel('Initial Probability Density')
 
 % iterate through 2dmap to solve PDE system
 for i=1:50
-    Jnext = HJBmap2D_distance3(DD,Jnow,r,u,mu,sig,par);
+    Jnext = HJBmap2D(DD,Jnow,r,u,mu,sig,par);
     % plot initial distribution
     Jnext_plot = reshape(Jnext,length(x1),length(x2));
-    surf(x2,x1,Jnext_plot)
+    surf(x1,x2,Jnext_plot)
     caxis([min(Jnext_plot(:))-0.5*range(Jnext_plot(:)),max(Jnext_plot(:))])
-    if i<15
-        axis([1 n2*d 1 n1*d 0 12.0e7])
-    else
-        axis([1 n2*d 1 n1*d 0 12.0e6])
-    end
+    axis([0 25 0 25 0 12.0e7])
     xlabel('x1')
     ylabel('x2')
     zlabel('Current Probability Density')
